@@ -20,52 +20,8 @@ Use assignment_test.py to test your functions
 import tkinter as tk 
 from tkinter import *
 
-def binary_to_decimal(binary):
-    # binary is a tuple of length 8
-    # return value is an integer decimal
-    binary = ''.join(str(i) for i in binary)
-    decimal = int(binary, 2)
-    return decimal 
-
-
-def decimal_to_binary(decimal):
-    # decimal is an integer value
-    # binary is a tuple of length 8 that contains 1's and 0's
-    binary = bin(decimal)
-    binary.split(" ")
-    return binary
-
-
-def get_binary():
-    # function should read the entry widget and generate an integer
-    # this integer will be used as an input parameter for decimal to binary and the result updated
-    # in the 8 checkboxes
-    decimal = int(op.get())
-    binary = decimal_to_binary(decimal)
-    r1 = binary[8]
-    r2 = binary[7]
-    r3 = binary[6]
-    r4 = binary[5]
-    r5 = binary[4]
-    r6 = binary[3]
-    r7 = binary[2]
-    r8 = binary[1]
-
-
-def get_decimal():
-    # function should read the checkboxes and generate a tuple called binary of length 8 that has 1's and 0's
-    # this tuple will be used as an input parameter for binary_to_decimal and the result updated
-    # in the entry box
-    binary = [r8.get(),r7.get(),r6.get(),r5.get(),r4.get(),r3.get(),r2.get(),r1.get()]
-    decimal = binary_to_decimal(binary)
-    e1.delete(0,END)
-    e1.insert(0,decimal)
-
-
-
 win = tk.Tk()
 win.geometry("230x100")
-
 
 r1 = IntVar()
 r1.set(0)
@@ -83,6 +39,50 @@ r7 = IntVar()
 r7.set(0)
 r8 = IntVar()
 r8.set(0)
+
+def binary_to_decimal(binary):
+    # binary is a tuple of length 8
+    # return value is an integer decimal
+    binary = ''.join(str(i) for i in binary)
+    decimal = int(binary, 2)
+    return decimal 
+
+
+def decimal_to_binary(decimal):
+    # decimal is an integer value
+    # binary is a tuple of length 8 that contains 1's and 0's
+    binary = bin(decimal)
+    binary = list(binary)
+    if len(binary) < 10:
+        for m in range(10 - len(binary)):
+            binary.insert(2,0)
+    return binary
+
+def get_binary():
+    # function should read the entry widget and generate an integer
+    # this integer will be used as an input parameter for decimal to binary and the result updated
+    # in the 8 checkboxes
+    decimal = int(op.get())
+    binary = decimal_to_binary(decimal)
+    r1.set(binary[9])
+    r2.set(binary[8])
+    r3.set(binary[7])
+    r4.set(binary[6])
+    r5.set(binary[5])
+    r6.set(binary[4])
+    r7.set(binary[3])
+    r8.set(binary[2])
+    
+
+def get_decimal():
+    # function should read the checkboxes and generate a tuple called binary of length 8 that has 1's and 0's
+    # this tuple will be used as an input parameter for binary_to_decimal and the result updated
+    # in the entry box
+    binary = [r8.get(),r7.get(),r6.get(),r5.get(),r4.get(),r3.get(),r2.get(),r1.get()]
+    decimal = binary_to_decimal(binary)
+    e1.delete(0,END)
+    e1.insert(0,decimal)
+
 
 op = StringVar()
 op.set("")
