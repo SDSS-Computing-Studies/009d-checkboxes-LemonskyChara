@@ -53,6 +53,8 @@ def decimal_to_binary(decimal):
     # binary is a tuple of length 8 that contains 1's and 0's
     binary = bin(decimal)
     binary = list(binary)
+    binary = ','.join(str(i) for i in binary)
+    binary = binary.split(",")
     if len(binary) < 10:
         for m in range(10 - len(binary)):
             binary.insert(2,0)
